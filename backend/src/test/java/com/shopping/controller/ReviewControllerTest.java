@@ -34,12 +34,12 @@ class ReviewControllerTest {
     void getReviewsReturnsOk() throws Exception {
         when(reviewService.getReviewsByProductId(any(), any())).thenReturn(new PagedResponse<>(List.of(new Review()), 1, 1, 10, 0, true, true, "UNSORTED"));
 
-        mockMvc.perform(get("/api/reviews/1")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/admin/reviews/1")).andExpect(status().isOk());
     }
 
     @Test
     void createReviewReturnsCreated() throws Exception {
-        mockMvc.perform(post("/api/reviews")
+        mockMvc.perform(post("/api/admin/reviews")
                 .contentType(APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(java.util.Map.of(
                     "productId", 1,

@@ -1,5 +1,8 @@
 # Shopping Admin System
 
+For full-stack public hosting with HTTPS, see [DEPLOYMENT.md](DEPLOYMENT.md).
+For hosting the complete application on Render, see [DEPLOY-RENDER.md](DEPLOY-RENDER.md).
+
 Production-ready shopping administration platform built with Spring Boot 3.1.5, plain JDBC, MySQL, React, Vite, Tailwind CSS, and shadcn-style UI components.
 
 ## Architecture
@@ -115,7 +118,7 @@ Service URLs:
 | Method | Endpoint | Description |
 |---|---|---|
 | `POST` | `/api/auth/login` | Authenticate and receive JWT |
-| `POST` | `/api/auth/register` | Register admin or manager and receive JWT |
+| `POST` | `/api/auth/register` | Register a customer and receive JWT; privileged roles are rejected |
 | `GET` | `/api/dashboard/stats` | Revenue, order status totals, top products, KPI trends |
 | `GET` | `/api/products` | Paginated products with category and price filters |
 | `POST` | `/api/products` | Create product |

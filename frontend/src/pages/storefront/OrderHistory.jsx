@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
-import { Package } from 'lucide-react';
+import { Package, FileText } from 'lucide-react';
 import { formatCurrency } from '../../lib/utils';
+import InvoiceModal from '../../components/InvoiceModal';
 
-const P = { fontFamily: "'Press Start 2P', monospace" };
+const P = { fontFamily: "'Russo One', sans-serif" };
 
 export default function OrderHistory() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [invoiceOrder, setInvoiceOrder] = useState(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -54,8 +56,8 @@ export default function OrderHistory() {
           <Package className="w-12 h-12 text-[#5C94FC]" />
         </div>
         <h2 className="text-lg font-bold text-[#E52521] mb-2" style={P}>No orders yet</h2>
-        <p className="text-[9px] text-[#4a4a6a] mb-6" style={P}>Browse our catalog and place your first order.</p>
-        <Link to="/shop/catalog" className="retro-btn bg-[#FBD000] hover:bg-[#ffe033] text-black font-bold py-2 px-6 text-[9px]" style={P}>Start Shopping</Link>
+        <p className="text-[15px] text-[#4a4a6a] mb-6" style={P}>Browse our catalog and place your first order.</p>
+        <Link to="/shop/catalog" className="retro-btn bg-[#FBD000] hover:bg-[#ffe033] text-black font-bold py-2 px-6 text-[15px]" style={P}>Start Shopping</Link>
       </div>
     );
   }
@@ -72,25 +74,30 @@ export default function OrderHistory() {
             <div className="bg-[#1A1A2E] border-b-2 border-black px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex gap-8">
                 <div>
-                  <p className="text-[7px] text-[#5C94FC] uppercase tracking-wider font-bold mb-1" style={P}>Order Placed</p>
-                  <p className="text-[9px] font-bold text-[#FBD000]" style={P}>{new Date(order.createdAt).toLocaleDateString()}</p>
+                  <p className="text-[16px] text-[#5C94FC] uppercase tracking-wider font-bold mb-1" style={P}>Order Placed</p>
+                  <p className="text-[15px] font-bold text-white" style={P}>{new Date(order.createdAt).toLocaleDateString()}</p>
                 </div>
                 <div>
-                  <p className="text-[7px] text-[#5C94FC] uppercase tracking-wider font-bold mb-1" style={P}>Total</p>
-                  <p className="text-[9px] font-bold text-[#FBD000]" style={P}>{formatCurrency(order.totalAmount)}</p>
+                  <p className="text-[16px] text-[#5C94FC] uppercase tracking-wider font-bold mb-1" style={P}>Total</p>
+                  <p className="text-[15px] font-bold text-white" style={P}>{formatCurrency(order.totalAmount)}</p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-[7px] text-[#5C94FC] uppercase tracking-wider font-bold mb-1" style={P}>Order #</p>
-                <p className="text-[9px] font-bold text-[#FBD000]" style={P}>{order.orderId}</p>
+                <p className="text-[16px] text-[#5C94FC] uppercase tracking-wider font-bold mb-1" style={P}>Order #</p>
+                <p className="text-[15px] font-bold text-white" style={P}>{order.orderId}</p>
               </div>
             </div>
 
             <div className="p-6">
-              <div className="mb-4">
+              <div className="mb-4 flex items-center gap-3">
                 <span className="pixel-badge" style={{ background: ss.bg, color: ss.color }}>
                   {order.status}
                 </span>
+                {order.status === 'DELIVERED' && (
+                  <button onClick={() => setInvoiceOrder(order)} className="retro-btn flex items-center gap-1 bg-[#43B047] text-white text-[12px] px-3 py-1" style={P}>
+                    <FileText size={12} /> View Invoice
+                  </button>
+                )}
               </div>
 
               <div className="space-y-4">
@@ -100,15 +107,15 @@ export default function OrderHistory() {
                       <Package className="w-6 h-6 text-[#5C94FC]" />
                     </Link>
                     <div className="flex-1">
-                      <Link to={`/shop/product/${item.productId}`} className="text-[9px] font-bold text-[#049CD8] hover:text-[#E52521]" style={P}>
-                        Product #{item.productId}
+                      <Link to={`/shop/product/${item.productId}`} className="text-[15px] font-bold text-[#049CD8] hover:text-[#E52521]" style={P}>
+                        {item.productName || `Product #${item.productId}`}
                       </Link>
-                      <p className="text-[8px] text-[#4a4a6a] mt-1" style={P}>Qty: {item.quantity}</p>
-                      <p className="text-[9px] font-bold text-[#E52521] mt-1" style={P}>{formatCurrency(item.price)} each</p>
+                      <p className="text-[17px] text-[#4a4a6a] mt-1" style={P}>Qty: {item.quantity}</p>
+                      <p className="text-[15px] font-bold text-[#E52521] mt-1" style={P}>{formatCurrency(item.price)} each</p>
                     </div>
                   </div>
                 )) : (
-                  <p className="text-[9px] text-[#4a4a6a]" style={P}>No items found.</p>
+                  <p className="text-[15px] text-[#4a4a6a]" style={P}>No items found.</p>
                 )}
               </div>
             </div>
@@ -116,6 +123,7 @@ export default function OrderHistory() {
           );
         })}
       </div>
+      {invoiceOrder && <InvoiceModal order={invoiceOrder} onClose={() => setInvoiceOrder(null)} />}
     </div>
   );
 }

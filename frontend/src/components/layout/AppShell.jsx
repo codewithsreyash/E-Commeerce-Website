@@ -6,7 +6,7 @@ import { cn } from '../../lib/utils';
 import { getStoredUser, logout } from '../../services/api';
 import { Button } from '../ui/button';
 
-const P = { fontFamily: "'Press Start 2P', monospace" };
+const P = { fontFamily: "'Russo One', sans-serif" };
 
 const navItems = [
   { label: 'Dashboard', to: '/admin', icon: LayoutDashboard, color: '#E52521' },
@@ -40,8 +40,8 @@ function AppShell() {
         >
           <div className="mb-8 flex items-center justify-between">
             <div className={cn('transition-all', collapsed && 'lg:hidden')}>
-              <p className="text-[8px] uppercase tracking-[0.35em] text-[#5C94FC]" style={P}>Admin Suite</p>
-              <h1 className="mt-2 text-lg font-bold text-[#FBD000]" style={P}>Shop Pulse</h1>
+              <p className="text-[17px] uppercase tracking-[0.35em] text-[#5C94FC]" style={P}>Admin Suite</p>
+              <h1 className="mt-2 text-lg font-bold text-white" style={P}>Shop Pulse</h1>
             </div>
             <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileOpen(false)}>
               <ChevronLeft className="h-5 w-5" />
@@ -59,7 +59,7 @@ function AppShell() {
                 end={to === '/admin'}
                 className={({ isActive }) =>
                   cn(
-                    'flex items-center gap-3 border-2 px-4 py-3 text-[9px] font-bold transition-all',
+                    'flex items-center gap-3 border-2 px-4 py-3 text-[15px] font-bold transition-all',
                     isActive ? 'border-black shadow-[3px_3px_0px_rgba(0,0,0,0.5)]' : 'border-transparent hover:border-[#5C94FC]/30',
                     collapsed && 'lg:justify-center lg:px-0',
                   )
@@ -67,7 +67,7 @@ function AppShell() {
                 style={({ isActive }) => ({
                   background: isActive ? `${color}25` : 'transparent',
                   color: isActive ? color : '#5C94FC',
-                  fontFamily: "'Press Start 2P', monospace",
+                  fontFamily: "'Russo One', sans-serif",
                 })}
                 onClick={() => setMobileOpen(false)}
               >
@@ -78,9 +78,9 @@ function AppShell() {
           </nav>
 
           <div className="mt-auto border-2 border-black p-4 shadow-[3px_3px_0px_rgba(0,0,0,0.4)]" style={{ background: '#0F0F23' }}>
-            <p className="text-[7px] uppercase tracking-[0.3em] text-[#4a4a6a]" style={P}>Signed In</p>
-            <p className="mt-3 text-[9px] font-bold text-[#FBD000]" style={P}>{user?.username ?? 'Admin'}</p>
-            <p className="text-[8px] text-[#5C94FC] mt-1" style={P}>{user?.role ?? 'ADMIN'}</p>
+            <p className="text-[16px] uppercase tracking-[0.3em] text-[#4a4a6a]" style={P}>Signed In</p>
+            <p className="mt-3 text-[15px] font-bold text-white" style={P}>{user?.username ?? 'Admin'}</p>
+            <p className="text-[17px] text-[#5C94FC] mt-1" style={P}>{user?.role ?? 'ADMIN'}</p>
             <Button className="mt-4 w-full" variant="danger" onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
               <span className={cn(collapsed && 'lg:hidden')}>Logout</span>
@@ -95,11 +95,11 @@ function AppShell() {
                 <Menu className="h-5 w-5" />
               </Button>
               <div>
-                <p className="text-[8px] uppercase tracking-[0.3em] text-[#4a4a6a]" style={P}>Shopping Admin System</p>
-                <p className="mt-1 text-[9px] text-[#5C94FC]" style={P}>Operations, revenue tracking, and catalog management.</p>
+                <p className="text-[17px] uppercase tracking-[0.3em] text-[#4a4a6a]" style={P}>Shopping Admin System</p>
+                <p className="mt-1 text-[15px] text-[#5C94FC]" style={P}>Operations, revenue tracking, and catalog management.</p>
               </div>
               <div className="flex items-center gap-3">
-                <NavLink to="/shop" className="text-[8px] text-[#5C94FC] hover:text-[#FBD000] transition-colors border-2 border-black px-3 py-1.5 shadow-[2px_2px_0px_rgba(0,0,0,0.3)]" style={{ background: '#1A1A2E', ...P }}>
+                <NavLink to="/shop" className="text-[17px] text-[#5C94FC] hover:text-[#FBD000] transition-colors border-2 border-black px-3 py-1.5 shadow-[2px_2px_0px_rgba(0,0,0,0.3)]" style={{ background: '#1A1A2E', ...P }}>
                   ← View Store
                 </NavLink>
                 <Button variant="danger" size="sm" onClick={handleLogout}>

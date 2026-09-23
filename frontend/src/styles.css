@@ -26,10 +26,10 @@
 html, body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Press Start 2P", "Courier New", monospace;
+  font-family: "Inter", "Segoe UI", sans-serif;
   background: var(--mario-light);
   color: #111827;
-  image-rendering: pixelated;
+  image-rendering: auto;
 }
 
 /* ── PIXEL BORDER UTILITY ── */
@@ -119,8 +119,8 @@ html, body {
   background: rgba(15,15,35,0.97) !important;
   padding: 0.75rem !important;
   color: #fbd000 !important;
-  font-family: "Press Start 2P", monospace !important;
-  font-size: 9px !important;
+  font-family: "Russo One", sans-serif !important;
+  font-size: 11px !important;
 }
 
 /* ── STOREFRONT ── */
@@ -202,7 +202,7 @@ html, body {
   border: var(--retro-border);
   box-shadow: var(--pixel-shadow);
   transition: all 0.1s;
-  font-family: "Press Start 2P", monospace;
+  font-family: "Russo One", sans-serif;
 }
 .retro-btn:hover {
   transform: translate(-2px, -2px);
@@ -217,14 +217,14 @@ html, body {
 .retro-input {
   border: var(--retro-border-thin);
   box-shadow: var(--pixel-shadow-sm);
-  font-family: "Press Start 2P", monospace;
-  font-size: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
   background: #1A1A2E;
-  color: #FBD000;
+  color: #ffffff;
   outline: none;
 }
 .retro-input:focus {
-  box-shadow: 0 0 8px rgba(251,208,0,0.5), var(--pixel-shadow-sm);
+  box-shadow: 0 0 8px rgba(4,156,216,0.5), var(--pixel-shadow-sm);
 }
 .retro-input::placeholder {
   color: #4a4a6a;
@@ -258,8 +258,8 @@ html, body {
 .pixel-badge {
   border: 2px solid #000;
   box-shadow: 2px 2px 0px rgba(0,0,0,0.4);
-  font-family: "Press Start 2P", monospace;
-  font-size: 8px;
+  font-family: "Russo One", sans-serif;
+  font-size: 10px;
   padding: 3px 8px;
   text-transform: uppercase;
 }

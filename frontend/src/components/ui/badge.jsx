@@ -12,7 +12,7 @@ export function Badge({ className, variant = 'default', ...props }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-none border-2 px-3 py-1 text-[8px] font-semibold tracking-wide shadow-[2px_2px_0px_rgba(0,0,0,0.4)] font-['Press_Start_2P',monospace]",
+        "inline-flex items-center rounded-none border-2 px-3 py-1 text-[17px] font-semibold tracking-wide shadow-[2px_2px_0px_rgba(0,0,0,0.4)] font-['Press_Start_2P',monospace]",
         variants[variant],
         className,
       )}

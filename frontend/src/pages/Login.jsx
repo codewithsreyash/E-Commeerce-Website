@@ -6,7 +6,7 @@ import { getErrorMessage, getFieldError } from '../lib/utils';
 import { login } from '../services/api';
 import api from '../services/api';
 
-const P = { fontFamily: "'Press Start 2P', monospace" };
+const P = { fontFamily: "'Russo One', sans-serif" };
 
 function Login() {
   const navigate = useNavigate();
@@ -55,14 +55,14 @@ function Login() {
     }
   };
 
-  const inputCls = "w-full border-2 border-black bg-[#1A1A2E] p-3 text-[10px] text-[#FBD000] outline-none focus:border-[#FBD000] focus:shadow-[0_0_8px_rgba(251,208,0,0.4),2px_2px_0px_rgba(0,0,0,0.5)] shadow-[2px_2px_0px_rgba(0,0,0,0.5)] placeholder:text-[#4a4a6a]";
+  const inputCls = "w-full border-2 border-black bg-[#1A1A2E] p-3 text-[16px] text-white outline-none focus:border-[#049CD8] focus:shadow-[0_0_8px_rgba(4,156,216,0.4),2px_2px_0px_rgba(0,0,0,0.5)] shadow-[2px_2px_0px_rgba(0,0,0,0.5)] placeholder:text-[#4a4a6a]";
 
   return (
     <div className="dark-page flex flex-col items-center justify-center px-4 py-10">
       {/* Logo */}
       <Link to="/" className="flex items-center gap-3 mb-8">
         <div className="bg-[#E52521] border-2 border-black p-1.5 shadow-[2px_2px_0px_rgba(0,0,0,0.5)]">
-          <ShoppingCart size={22} className="text-[#FBD000]" />
+          <ShoppingCart size={22} className="text-white" />
         </div>
         <span className="text-xl font-bold text-white tracking-tight" style={P}>
           Shop<span className="text-[#FBD000]">Stream</span>
@@ -76,9 +76,9 @@ function Login() {
             <button
               key={key}
               onClick={() => { setTab(key); setError(''); }}
-              className={`flex-1 py-2.5 text-[9px] font-bold transition-all ${P} ${
+              className={`flex-1 py-2.5 text-[15px] font-bold transition-all ${P} ${
                 tab === key
-                  ? 'bg-[#E52521] text-[#FBD000]'
+                  ? 'bg-[#E52521] text-white'
                   : 'bg-[#0F0F23] text-[#4a4a6a] hover:text-[#5C94FC]'
               }`}
             >
@@ -90,7 +90,7 @@ function Login() {
         {tab === 'login' ? (
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-[9px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Username / Email</label>
+              <label className="block text-[15px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Username / Email</label>
               <input
                 required type="text" value={form.username}
                 onChange={(e) => setForm((f) => ({ ...f, username: e.target.value }))}
@@ -100,7 +100,7 @@ function Login() {
               />
             </div>
             <div>
-              <label className="block text-[9px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Password</label>
+              <label className="block text-[15px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Password</label>
               <input
                 required type="password" value={form.password}
                 onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
@@ -109,24 +109,24 @@ function Login() {
                 style={P}
               />
             </div>
-            {error && <p className="text-[8px] text-[#FF6B9D] bg-[#E52521]/20 border-2 border-[#E52521] p-3" style={P}>{error}</p>}
+            {error && <p className="text-[17px] text-[#FF6B9D] bg-[#E52521]/20 border-2 border-[#E52521] p-3" style={P}>{error}</p>}
             <button
               type="submit" disabled={isSubmitting}
-              className="retro-btn w-full bg-[#FBD000] hover:bg-[#ffe033] text-black font-bold py-3 text-[10px] mt-2"
+              className="retro-btn w-full bg-[#FBD000] hover:bg-[#ffe033] text-black font-bold py-3 text-[16px] mt-2"
               style={P}
             >
               {isSubmitting ? 'Signing in...' : 'Sign In'}
             </button>
-            <div className="bg-[#0F0F23] border-2 border-black p-4 mt-2 space-y-2 text-[8px] text-[#5C94FC]" style={P}>
-              <p className="font-bold text-[#FBD000] mb-2 text-[9px]">Demo Credentials</p>
-              <p className="text-[#E52521]">Admin: <span className="text-[#FBD000]">admin@store.com</span> / <span className="text-[#FBD000]">password</span></p>
-              <p className="text-[#43B047]">Customer: <span className="text-[#FBD000]">customer@store.com</span> / <span className="text-[#FBD000]">password</span></p>
+            <div className="bg-[#0F0F23] border-2 border-black p-4 mt-2 space-y-2 text-[17px] text-[#5C94FC]" style={P}>
+              <p className="font-bold text-white mb-2 text-[15px]">Demo Credentials</p>
+              <p className="text-[#E52521]">Admin: <span className="text-white">admin@store.com</span> / <span className="text-white">password</span></p>
+              <p className="text-[#43B047]">Customer: <span className="text-white">customer@store.com</span> / <span className="text-white">password</span></p>
             </div>
           </form>
         ) : (
           <form onSubmit={handleRegister} className="space-y-4">
             <div>
-              <label className="block text-[9px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Email / Username</label>
+              <label className="block text-[15px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Email / Username</label>
               <input
                 required type="text" value={form.username}
                 onChange={(e) => setForm((f) => ({ ...f, username: e.target.value }))}
@@ -136,7 +136,7 @@ function Login() {
               />
             </div>
             <div>
-              <label className="block text-[9px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Password</label>
+              <label className="block text-[15px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Password</label>
               <input
                 required type="password" value={form.password}
                 onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
@@ -146,7 +146,7 @@ function Login() {
               />
             </div>
             <div>
-              <label className="block text-[9px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Confirm Password</label>
+              <label className="block text-[15px] font-bold text-[#5C94FC] mb-1.5 uppercase" style={P}>Confirm Password</label>
               <input
                 required type="password" value={form.confirmPassword}
                 onChange={(e) => setForm((f) => ({ ...f, confirmPassword: e.target.value }))}
@@ -155,10 +155,10 @@ function Login() {
                 style={P}
               />
             </div>
-            {error && <p className="text-[8px] text-[#FF6B9D] bg-[#E52521]/20 border-2 border-[#E52521] p-3" style={P}>{error}</p>}
+            {error && <p className="text-[17px] text-[#FF6B9D] bg-[#E52521]/20 border-2 border-[#E52521] p-3" style={P}>{error}</p>}
             <button
               type="submit" disabled={isSubmitting}
-              className="retro-btn w-full bg-[#43B047] hover:bg-[#52c456] text-white font-bold py-3 text-[10px] mt-2"
+              className="retro-btn w-full bg-[#43B047] hover:bg-[#52c456] text-white font-bold py-3 text-[16px] mt-2"
               style={P}
             >
               {isSubmitting ? 'Creating account...' : 'Create Account'}
@@ -167,7 +167,7 @@ function Login() {
         )}
       </div>
 
-      <p className="text-[7px] text-[#4a4a6a] mt-6 text-center" style={P}>
+      <p className="text-[16px] text-[#4a4a6a] mt-6 text-center" style={P}>
         By continuing, you agree to ShopStream&apos;s Conditions of Use.
       </p>
     </div>

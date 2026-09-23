@@ -37,12 +37,12 @@ class ProductControllerTest {
         when(productService.getAllProducts(any(), any(), any(), any()))
             .thenReturn(new PagedResponse<>(List.of(new Product()), 1, 1, 10, 0, true, true, "UNSORTED"));
 
-        mockMvc.perform(get("/api/products")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/admin/products")).andExpect(status().isOk());
     }
 
     @Test
     void createProductReturnsCreated() throws Exception {
-        mockMvc.perform(post("/api/products")
+        mockMvc.perform(post("/api/admin/products")
                 .contentType(APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(java.util.Map.of(
                     "sellerId", 1,
@@ -57,7 +57,7 @@ class ProductControllerTest {
 
     @Test
     void updateAndDeleteReturnNoContent() throws Exception {
-        mockMvc.perform(put("/api/products/1")
+        mockMvc.perform(put("/api/admin/products/1")
                 .contentType(APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(java.util.Map.of(
                     "sellerId", 1,
@@ -69,6 +69,6 @@ class ProductControllerTest {
                 ))))
             .andExpect(status().isNoContent());
 
-        mockMvc.perform(delete("/api/products/1")).andExpect(status().isNoContent());
+        mockMvc.perform(delete("/api/admin/products/1")).andExpect(status().isNoContent());
     }
 }

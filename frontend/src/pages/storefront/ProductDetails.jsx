@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import { useCart } from '../../components/storefront/CartContext';
 import toast from 'react-hot-toast';
 import { ShoppingCart, Truck, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { formatCurrency } from '../../lib/utils';
 
-const P = { fontFamily: "'Press Start 2P', monospace" };
+const P = { fontFamily: "'Russo One', sans-serif" };
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -50,8 +50,8 @@ export default function ProductDetails() {
     return (
       <div className="max-w-[1200px] mx-auto px-4 py-24 text-center">
         <h2 className="text-xl font-bold text-[#E52521] mb-4" style={P}>Product not found</h2>
-        <p className="text-[9px] text-[#4a4a6a] mb-8" style={P}>We couldn&apos;t find the product you&apos;re looking for.</p>
-        <button onClick={() => navigate('/shop/catalog')} className="retro-btn text-[9px] px-6 py-2 bg-[#049CD8] text-white" style={P}>
+        <p className="text-[15px] text-[#4a4a6a] mb-8" style={P}>We couldn&apos;t find the product you&apos;re looking for.</p>
+        <button onClick={() => navigate('/shop/catalog')} className="retro-btn text-[15px] px-6 py-2 bg-[#049CD8] text-white" style={P}>
           <ArrowLeft className="inline w-4 h-4 mr-1"/> Back to Catalog
         </button>
       </div>
@@ -62,7 +62,7 @@ export default function ProductDetails() {
     <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Back Navigation */}
       <div className="mb-6">
-        <button onClick={() => navigate(-1)} className="retro-btn text-[8px] px-4 py-2 bg-[#1A1A2E] text-[#5C94FC]" style={P}>
+        <button onClick={() => navigate(-1)} className="retro-btn text-[17px] px-4 py-2 bg-[#1A1A2E] text-[#5C94FC]" style={P}>
           <ArrowLeft className="inline w-4 h-4 mr-1" /> Back to results
         </button>
       </div>
@@ -96,8 +96,8 @@ export default function ProductDetails() {
           </div>
 
           <div className="mb-8">
-            <h3 className="text-[9px] font-bold text-[#1A1A2E] mb-2 uppercase" style={P}>About this item</h3>
-            <p className="text-[9px] whitespace-pre-line text-[#4a4a6a] leading-relaxed" style={P}>{product.description}</p>
+            <h3 className="text-[15px] font-bold text-[#1A1A2E] mb-2 uppercase" style={P}>About this item</h3>
+            <p className="text-[15px] whitespace-pre-line text-[#4a4a6a] leading-relaxed" style={P}>{product.description}</p>
           </div>
 
           <div className="retro-card-light p-6">
@@ -108,11 +108,11 @@ export default function ProductDetails() {
             </div>
 
             <div className="flex items-center gap-4 mb-6">
-              <label className="text-[9px] font-bold text-[#1A1A2E]" style={P}>Qty:</label>
+              <label className="text-[15px] font-bold text-[#1A1A2E]" style={P}>Qty:</label>
               <select
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
-                className="border-2 border-black bg-[#FFF8E7] px-2 py-1 text-[9px] outline-none shadow-[2px_2px_0px_rgba(0,0,0,0.3)]"
+                className="border-2 border-black bg-[#FFF8E7] px-2 py-1 text-[15px] outline-none shadow-[2px_2px_0px_rgba(0,0,0,0.3)]"
                 style={P}
                 disabled={product.stock === 0}
               >
@@ -125,7 +125,7 @@ export default function ProductDetails() {
             <button
               onClick={() => { addToCart(product, quantity); toast.success(`Added ${quantity} to cart!`); }}
               disabled={product.stock === 0}
-              className="retro-btn w-full bg-[#FBD000] hover:bg-[#ffe033] text-black font-bold py-3 px-4 text-[10px] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="retro-btn w-full bg-[#FBD000] hover:bg-[#ffe033] text-black font-bold py-3 px-4 text-[16px] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               style={P}
             >
               <ShoppingCart className="w-5 h-5"/> Add to Cart
@@ -133,7 +133,7 @@ export default function ProductDetails() {
             <button
               onClick={() => { addToCart(product, quantity); navigate('/shop/checkout'); }}
               disabled={product.stock === 0}
-              className="retro-btn w-full mt-3 bg-[#E52521] hover:bg-[#ff3333] text-white font-bold py-3 px-4 text-[10px] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="retro-btn w-full mt-3 bg-[#E52521] hover:bg-[#ff3333] text-white font-bold py-3 px-4 text-[16px] disabled:opacity-50 disabled:cursor-not-allowed"
               style={P}
             >
               Buy Now
@@ -142,11 +142,11 @@ export default function ProductDetails() {
             <div className="mt-6 flex flex-col gap-3">
               <div className="flex items-center gap-3">
                 <Truck className="w-5 h-5 text-[#049CD8]" />
-                <span className="text-[8px] text-[#1A1A2E]" style={P}>Ships from <b>ShopStream</b></span>
+                <span className="text-[17px] text-[#1A1A2E]" style={P}>Ships from <b>ShopStream</b></span>
               </div>
               <div className="flex items-center gap-3">
                 <ShieldCheck className="w-5 h-5 text-[#43B047]" />
-                <span className="text-[8px] text-[#1A1A2E]" style={P}>Eligible for Return</span>
+                <span className="text-[17px] text-[#1A1A2E]" style={P}>Eligible for Return</span>
               </div>
             </div>
           </div>

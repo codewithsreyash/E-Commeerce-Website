@@ -41,6 +41,9 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request) {
+        if (request.role() != UserRole.CUSTOMER) {
+            throw new org.springframework.security.access.AccessDeniedException("Public registration is limited to customers");
+        }
         if (userRepository.findByUsername(request.username()).isPresent()) {
             throw new DuplicateResourceException("Username already exists");
         }

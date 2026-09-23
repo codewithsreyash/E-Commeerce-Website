@@ -32,12 +32,12 @@ class PaymentControllerTest {
     void getPaymentReturnsOk() throws Exception {
         when(paymentService.getPaymentByOrderId(1L)).thenReturn(new Payment());
 
-        mockMvc.perform(get("/api/payments/1")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/admin/payments/1")).andExpect(status().isOk());
     }
 
     @Test
     void createPaymentReturnsCreated() throws Exception {
-        mockMvc.perform(post("/api/payments")
+        mockMvc.perform(post("/api/admin/payments")
                 .contentType(APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(java.util.Map.of(
                     "orderId", 1,

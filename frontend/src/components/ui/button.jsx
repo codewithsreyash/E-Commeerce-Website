@@ -12,8 +12,8 @@ const variants = {
 };
 
 const sizes = {
-  default: 'h-11 px-5 py-2 text-[10px]',
-  sm: 'h-9 px-3 text-[8px]',
+  default: 'h-11 px-5 py-2 text-[16px]',
+  sm: 'h-9 px-3 text-[17px]',
   icon: 'h-10 w-10',
 };
 

@@ -37,15 +37,15 @@ class OrderControllerTest {
             .thenReturn(new PagedResponse<>(List.of(new Order()), 1, 1, 10, 0, true, true, "UNSORTED"));
         when(orderService.getRevenueForRange(any(), any())).thenReturn(500.0);
 
-        mockMvc.perform(get("/api/orders")).andExpect(status().isOk());
-        mockMvc.perform(get("/api/orders/revenue")).andExpect(status().isOk()).andExpect(jsonPath("$.revenue").value(500.0));
+        mockMvc.perform(get("/api/admin/orders")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/admin/orders/revenue")).andExpect(status().isOk()).andExpect(jsonPath("$.revenue").value(500.0));
     }
 
     @Test
     void createOrderReturnsCreated() throws Exception {
         when(orderService.createOrder(any())).thenReturn(1L);
 
-        mockMvc.perform(post("/api/orders")
+        mockMvc.perform(post("/api/admin/orders")
                 .contentType(APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(java.util.Map.of("customerId", 1, "totalAmount", 99.0, "status", "PENDING"))))
             .andExpect(status().isCreated())

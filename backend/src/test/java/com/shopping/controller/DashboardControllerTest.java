@@ -42,7 +42,7 @@ class DashboardControllerTest {
             )
         );
 
-        mockMvc.perform(get("/api/dashboard/stats"))
+        mockMvc.perform(get("/api/admin/dashboard/stats"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.totalRevenue").value(1000.0))
             .andExpect(jsonPath("$.orderStatusCounts.PENDING").value(2));

@@ -1,0 +1,75 @@
+# Paid API and MySQL compute plus a persistent disk. Review Render's cost estimate.
+services:
+  - type: pserv
+    name: shopping-mysql
+    runtime: docker
+    region: singapore
+    plan: 1c-2g
+    dockerfilePath: ./db/Dockerfile
+    dockerContext: ./db
+    disk:
+      name: shopping-mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 10
+    envVars:
+      - key: MYSQL_DATABASE
+        value: shopping_system
+      - key: MYSQL_USER
+        value: shopping_app
+      - key: MYSQL_PASSWORD
+        generateValue: true
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+
+  - type: web
+    name: shopping-api
+    runtime: docker
+    region: singapore
+    plan: 1c-2g
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: shopping-mysql
+          property: host
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USERNAME
+        value: shopping_app
+      - key: DB_PASSWORD
+        fromService:
+          type: pserv
+          name: shopping-mysql
+          envVarKey: MYSQL_PASSWORD
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION_MS
+        value: "86400000"
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: CORS_ALLOWED_ORIGIN
+        sync: false
+      - key: MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS
+        value: never
+      - key: SERVER_FORWARD_HEADERS_STRATEGY
+        value: framework
+
+  - type: web
+    name: shopping-frontend
+    runtime: static
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: VITE_API_BASE_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

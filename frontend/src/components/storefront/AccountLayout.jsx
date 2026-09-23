@@ -3,7 +3,7 @@ import { Package, User, LogOut, ShoppingBag } from 'lucide-react';
 import { logout, getStoredUser } from '../../services/api';
 import toast from 'react-hot-toast';
 
-const P = { fontFamily: "'Press Start 2P', monospace" };
+const P = { fontFamily: "'Russo One', sans-serif" };
 
 export default function AccountLayout() {
   const navigate = useNavigate();
@@ -25,8 +25,8 @@ export default function AccountLayout() {
             <div className="w-10 h-10 border-2 border-black bg-[#E52521] flex items-center justify-center text-white font-bold text-sm mb-2 shadow-[2px_2px_0px_rgba(0,0,0,0.3)]" style={P}>
               {user?.username?.[0]?.toUpperCase() || 'U'}
             </div>
-            <p className="font-bold text-[9px] text-[#FBD000] truncate" style={P}>{user?.username || 'User'}</p>
-            <p className="text-[7px] text-[#5C94FC]" style={P}>{user?.role || 'CUSTOMER'}</p>
+            <p className="font-bold text-[15px] text-[#FBD000] truncate" style={P}>{user?.username || 'User'}</p>
+            <p className="text-[16px] text-[#5C94FC]" style={P}>{user?.role || 'CUSTOMER'}</p>
           </div>
 
           {/* Nav links */}
@@ -35,7 +35,7 @@ export default function AccountLayout() {
               <NavLink
                 to="/shop/account/orders"
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2.5 border-2 border-transparent transition-colors text-[8px] ${isActive ? 'bg-[#049CD8] text-white border-black shadow-[2px_2px_0px_rgba(0,0,0,0.3)]' : 'text-[#1A1A2E] hover:bg-[#FBD000]/20 hover:border-black'}`
+                  `flex items-center gap-3 px-3 py-2.5 border-2 border-transparent transition-colors text-[17px] ${isActive ? 'bg-[#049CD8] text-white border-black shadow-[2px_2px_0px_rgba(0,0,0,0.3)]' : 'text-[#1A1A2E] hover:bg-[#FBD000]/20 hover:border-black'}`
                 }
                 style={P}
               >
@@ -46,7 +46,7 @@ export default function AccountLayout() {
               <NavLink
                 to="/shop/account/settings"
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2.5 border-2 border-transparent transition-colors text-[8px] ${isActive ? 'bg-[#049CD8] text-white border-black shadow-[2px_2px_0px_rgba(0,0,0,0.3)]' : 'text-[#1A1A2E] hover:bg-[#FBD000]/20 hover:border-black'}`
+                  `flex items-center gap-3 px-3 py-2.5 border-2 border-transparent transition-colors text-[17px] ${isActive ? 'bg-[#049CD8] text-white border-black shadow-[2px_2px_0px_rgba(0,0,0,0.3)]' : 'text-[#1A1A2E] hover:bg-[#FBD000]/20 hover:border-black'}`
                 }
                 style={P}
               >
@@ -56,7 +56,7 @@ export default function AccountLayout() {
             <li>
               <NavLink
                 to="/shop/catalog"
-                className="flex items-center gap-3 px-3 py-2.5 border-2 border-transparent transition-colors text-[8px] text-[#1A1A2E] hover:bg-[#FBD000]/20 hover:border-black"
+                className="flex items-center gap-3 px-3 py-2.5 border-2 border-transparent transition-colors text-[17px] text-[#1A1A2E] hover:bg-[#FBD000]/20 hover:border-black"
                 style={P}
               >
                 <ShoppingBag className="w-4 h-4" /> Shop
@@ -68,7 +68,7 @@ export default function AccountLayout() {
           <div className="p-2 border-t-2 border-black/20">
             <button
               onClick={handleSignOut}
-              className="w-full flex items-center gap-3 px-3 py-2.5 border-2 border-transparent text-[8px] font-bold text-[#E52521] hover:bg-[#E52521]/10 hover:border-[#E52521] transition-colors"
+              className="w-full flex items-center gap-3 px-3 py-2.5 border-2 border-transparent text-[17px] font-bold text-[#E52521] hover:bg-[#E52521]/10 hover:border-[#E52521] transition-colors"
               style={P}
             >
               <LogOut className="w-4 h-4" /> Sign Out

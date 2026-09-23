@@ -13,6 +13,7 @@ import com.shopping.exception.DuplicateResourceException;
 import com.shopping.model.User;
 import com.shopping.model.UserRole;
 import com.shopping.repository.UserRepository;
+import com.shopping.repository.CustomerRepository;
 import com.shopping.security.AuthenticatedUser;
 import com.shopping.security.JwtService;
 import java.util.Optional;
@@ -31,6 +32,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 class AuthServiceTest {
     @Mock private AuthenticationManager authenticationManager;
     @Mock private UserRepository userRepository;
+    @Mock private CustomerRepository customerRepository;
     @Mock private PasswordEncoder passwordEncoder;
     @Mock private JwtService jwtService;
     @Mock private Authentication authentication;
@@ -39,10 +41,11 @@ class AuthServiceTest {
 
     @Test
     void registerCreatesUserAndReturnsJwt() {
-        RegisterRequest request = new RegisterRequest("manager1", "Password@123", UserRole.MANAGER);
+        RegisterRequest request = new RegisterRequest("manager1", "Password@123", UserRole.CUSTOMER);
         when(userRepository.findByUsername("manager1")).thenReturn(Optional.empty());
         when(passwordEncoder.encode("Password@123")).thenReturn("encoded-password");
-        when(jwtService.generateToken("manager1", "MANAGER")).thenReturn("jwt-token");
+        when(jwtService.generateToken("manager1", "CUSTOMER")).thenReturn("jwt-token");
+        when(customerRepository.findAll(any(), any())).thenReturn(java.util.List.of());
 
         AuthResponse response = authService.register(request);
 
@@ -50,6 +53,8 @@ class AuthServiceTest {
         verify(userRepository).save(captor.capture());
         assertThat(captor.getValue().getUsername()).isEqualTo("manager1");
         assertThat(captor.getValue().getPasswordHash()).isEqualTo("encoded-password");
+        assertThat(captor.getValue().getRole()).isEqualTo("CUSTOMER");
+        verify(customerRepository).save(any());
         assertThat(response.token()).isEqualTo("jwt-token");
     }
 
@@ -57,8 +62,17 @@ class AuthServiceTest {
     void registerRejectsDuplicateUser() {
         when(userRepository.findByUsername("admin")).thenReturn(Optional.of(new User()));
 
-        assertThatThrownBy(() -> authService.register(new RegisterRequest("admin", "Password@123", UserRole.ADMIN)))
+        assertThatThrownBy(() -> authService.register(new RegisterRequest("admin", "Password@123", UserRole.CUSTOMER)))
             .isInstanceOf(DuplicateResourceException.class);
+    }
+
+    @Test
+    void publicRegistrationRejectsPrivilegedRoles() {
+        for (UserRole role : new UserRole[] {UserRole.ADMIN, UserRole.MANAGER}) {
+            assertThatThrownBy(() -> authService.register(new RegisterRequest("attacker", "Password@123", role)))
+                .isInstanceOf(org.springframework.security.access.AccessDeniedException.class);
+        }
+        org.mockito.Mockito.verifyNoInteractions(userRepository, customerRepository, jwtService);
     }
 
     @Test

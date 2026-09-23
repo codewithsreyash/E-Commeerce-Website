@@ -34,12 +34,12 @@ class SellerControllerTest {
     void getSellersReturnsOk() throws Exception {
         when(sellerService.getAllSellers(any(), any())).thenReturn(new PagedResponse<>(List.of(new Seller()), 1, 1, 10, 0, true, true, "UNSORTED"));
 
-        mockMvc.perform(get("/api/sellers")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/admin/sellers")).andExpect(status().isOk());
     }
 
     @Test
     void createSellerReturnsCreated() throws Exception {
-        mockMvc.perform(post("/api/sellers")
+        mockMvc.perform(post("/api/admin/sellers")
                 .contentType(APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(java.util.Map.of(
                     "companyName", "Shop Co",

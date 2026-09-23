@@ -34,12 +34,12 @@ class CustomerControllerTest {
     void getCustomersReturnsOk() throws Exception {
         when(customerService.getAllCustomers(any(), any())).thenReturn(new PagedResponse<>(List.of(new Customer()), 1, 1, 10, 0, true, true, "UNSORTED"));
 
-        mockMvc.perform(get("/api/customers")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/admin/customers")).andExpect(status().isOk());
     }
 
     @Test
     void createCustomerReturnsCreated() throws Exception {
-        mockMvc.perform(post("/api/customers")
+        mockMvc.perform(post("/api/admin/customers")
                 .contentType(APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(java.util.Map.of(
                     "firstName", "Jane",

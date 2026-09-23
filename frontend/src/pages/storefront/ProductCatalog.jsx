@@ -4,7 +4,7 @@ import api from '../../services/api';
 import { ShoppingCart, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { formatCurrency } from '../../lib/utils';
 
-const P = { fontFamily: "'Press Start 2P', monospace" };
+const P = { fontFamily: "'Russo One', sans-serif" };
 
 const CATEGORY_COLORS = {
   'Electronics': '#049CD8', 'Home & Kitchen': '#43B047',
@@ -57,19 +57,19 @@ export default function ProductCatalog() {
       <aside className="w-full md:w-64 flex-shrink-0">
         <div className="retro-card-light p-4">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-bold text-[10px] text-[#E52521]" style={P}>Filters</h3>
+            <h3 className="font-bold text-[16px] text-[#E52521]" style={P}>Filters</h3>
             {hasFilters && (
-              <button onClick={clearFilters} className="text-[8px] text-[#049CD8] hover:text-[#FBD000] flex items-center" style={P}>
+              <button onClick={clearFilters} className="text-[17px] text-[#049CD8] hover:text-[#FBD000] flex items-center" style={P}>
                 <X size={12} className="mr-0.5"/> Clear
               </button>
             )}
           </div>
           <div className="mb-6">
-            <h4 className="font-bold text-[8px] text-[#1A1A2E] mb-3 uppercase border-b-2 border-black/10 pb-2" style={P}>Category</h4>
+            <h4 className="font-bold text-[17px] text-[#1A1A2E] mb-3 uppercase border-b-2 border-black/10 pb-2" style={P}>Category</h4>
             <ul className="space-y-2">
               <li>
                 <button onClick={() => handleFilter('category', '')}
-                  className={`text-left w-full text-[8px] px-3 py-2 border-2 transition-all flex items-center gap-2 ${!currentCategory ? 'font-bold bg-[#E52521] text-white border-[#E52521] shadow-[2px_2px_0px_rgba(0,0,0,0.3)]' : 'bg-[#FFF8E7] text-[#1A1A2E] border-black hover:bg-[#FBD000] hover:text-black'}`} style={P}>
+                  className={`text-left w-full text-[17px] px-3 py-2 border-2 transition-all flex items-center gap-2 ${!currentCategory ? 'font-bold bg-[#E52521] text-white border-[#E52521] shadow-[2px_2px_0px_rgba(0,0,0,0.3)]' : 'bg-[#FFF8E7] text-[#1A1A2E] border-black hover:bg-[#FBD000] hover:text-black'}`} style={P}>
                   <span className={`w-2 h-2 border border-black ${!currentCategory ? 'bg-white' : 'bg-transparent'}`}></span>
                   All Categories
                 </button>
@@ -77,7 +77,7 @@ export default function ProductCatalog() {
               {categories.map((cat) => (
                 <li key={cat}>
                   <button onClick={() => handleFilter('category', cat)}
-                    className={`text-left w-full text-[8px] px-3 py-2 border-2 transition-all flex items-center gap-2 ${currentCategory === cat ? 'font-bold shadow-[2px_2px_0px_rgba(0,0,0,0.3)]' : 'bg-[#FFF8E7] hover:bg-[#FBD000]'}`}
+                    className={`text-left w-full text-[17px] px-3 py-2 border-2 transition-all flex items-center gap-2 ${currentCategory === cat ? 'font-bold shadow-[2px_2px_0px_rgba(0,0,0,0.3)]' : 'bg-[#FFF8E7] hover:bg-[#FBD000]'}`}
                     style={{ color: currentCategory === cat ? '#FFF' : '#1A1A2E', backgroundColor: currentCategory === cat ? getCatColor(cat) : undefined, borderColor: currentCategory === cat ? getCatColor(cat) : '#000', ...P }}>
                     <span className={`w-2 h-2 border border-black ${currentCategory === cat ? 'bg-white' : 'bg-transparent'}`}></span>
                     {cat}
@@ -87,8 +87,8 @@ export default function ProductCatalog() {
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-[8px] text-[#1A1A2E] mb-2 uppercase" style={P}>Price Range</h4>
-            <ul className="space-y-1 text-[8px] text-[#1A1A2E]" style={P}>
+            <h4 className="font-bold text-[17px] text-[#1A1A2E] mb-2 uppercase" style={P}>Price Range</h4>
+            <ul className="space-y-1 text-[17px] text-[#1A1A2E]" style={P}>
               <li><button className="hover:text-[#E52521]">Under $25</button></li>
               <li><button className="hover:text-[#E52521]">$25 to $50</button></li>
               <li><button className="hover:text-[#E52521]">$50 to $100</button></li>
@@ -101,7 +101,7 @@ export default function ProductCatalog() {
       {/* Main Grid */}
       <div className="flex-1">
         {currentKeyword && (
-          <h2 className="text-[10px] font-bold mb-4 retro-card-light p-4" style={P}>
+          <h2 className="text-[16px] font-bold mb-4 retro-card-light p-4" style={P}>
             Search: <span className="text-[#049CD8]">&quot;{currentKeyword}&quot;</span>
           </h2>
         )}
@@ -112,8 +112,8 @@ export default function ProductCatalog() {
         ) : products.length === 0 ? (
           <div className="retro-card-light p-12 text-center">
             <ShoppingCart className="w-12 h-12 text-[#4a4a6a] mx-auto mb-4" />
-            <h3 className="text-[10px] font-bold text-[#E52521]" style={P}>No products found</h3>
-            <p className="text-[8px] text-[#4a4a6a] mt-2" style={P}>Try adjusting your filters.</p>
+            <h3 className="text-[16px] font-bold text-[#E52521]" style={P}>No products found</h3>
+            <p className="text-[17px] text-[#4a4a6a] mt-2" style={P}>Try adjusting your filters.</p>
           </div>
         ) : (
           <>
@@ -131,7 +131,7 @@ export default function ProductCatalog() {
                     <span className="pixel-badge mb-1" style={{ background: `${getCatColor(product.category)}20`, color: getCatColor(product.category), borderColor: getCatColor(product.category) }}>
                       {product.category}
                     </span>
-                    <h3 className="font-bold text-[#1A1A2E] text-[9px] line-clamp-2 mt-2 mb-2" style={P}>{product.name}</h3>
+                    <h3 className="font-bold text-[#1A1A2E] text-[15px] line-clamp-2 mt-2 mb-2" style={P}>{product.name}</h3>
                     <span className="text-lg font-bold text-[#E52521]" style={P}>{formatCurrency(product.price)}</span>
                   </div>
                 </Link>
@@ -143,7 +143,7 @@ export default function ProductCatalog() {
                   className="retro-btn p-2 bg-[#049CD8] text-white disabled:opacity-50 disabled:cursor-not-allowed">
                   <ChevronLeft className="w-5 h-5"/>
                 </button>
-                <span className="text-[9px] text-[#1A1A2E] font-bold" style={P}>
+                <span className="text-[15px] text-[#1A1A2E] font-bold" style={P}>
                   Page {currentPage + 1} of {totalPages}
                 </span>
                 <button disabled={currentPage >= totalPages - 1} onClick={() => handleFilter('page', (currentPage + 1).toString())}

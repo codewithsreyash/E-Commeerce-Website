@@ -1,15 +1,14 @@
-import { Pencil, Plus, Search, Trash2, X, ImageIcon, Tag, Layers } from 'lucide-react';
+import { Pencil, Plus, Search, Trash2, X, ImageIcon, Layers } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../components/ui/button';
-import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Select } from '../components/ui/select';
 import { Skeleton } from '../components/ui/skeleton';
 import { formatCurrency, getErrorMessage } from '../lib/utils';
 import { createProduct, deleteProduct, getProducts, updateProduct } from '../services/api';
 
-const P = { fontFamily: "'Press Start 2P', monospace" };
+const P = { fontFamily: "'Russo One', sans-serif" };
 
 const defaultForm = { sellerId: 1, name: '', description: '', price: '', stock: '', category: '', imageUrl: '' };
 
@@ -86,14 +85,14 @@ export default function Products() {
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <p className="text-[8px] font-bold uppercase tracking-widest text-[#5C94FC] mb-1" style={P}>Catalog</p>
-          <h1 className="text-xl font-bold text-[#FBD000]" style={P}>Products</h1>
-          <p className="text-[9px] text-[#5C94FC] mt-1" style={P}>Add, edit, delete products and manage stock levels.</p>
+          <p className="text-[17px] font-bold uppercase tracking-widest text-[#5C94FC] mb-1" style={P}>Catalog</p>
+          <h1 className="text-xl font-bold text-white" style={P}>Products</h1>
+          <p className="text-[15px] text-[#5C94FC] mt-1" style={P}>Add, edit, delete products and manage stock levels.</p>
         </div>
         {!showForm && (
           <button
             onClick={() => { setShowForm(true); setEditingId(null); setForm(defaultForm); }}
-            className="retro-btn flex items-center gap-2 px-5 py-2.5 bg-[#049CD8] hover:bg-[#06b0f0] text-white font-bold text-[9px]"
+            className="retro-btn flex items-center gap-2 px-5 py-2.5 bg-[#049CD8] hover:bg-[#06b0f0] text-white font-bold text-[15px]"
             style={P}
           >
             <Plus className="w-4 h-4" /> Add Product
@@ -110,7 +109,7 @@ export default function Products() {
           { label: 'Out of Stock', value: outOfStock, color: '#E52521' },
         ].map(({ label, value, color }) => (
           <div key={label} className="border-3 border-black shadow-[3px_3px_0px_rgba(0,0,0,0.5)] p-4" style={{ background: `${color}20` }}>
-            <p className="text-[7px] font-bold uppercase tracking-wider mb-1" style={{ color, ...P }}>{label}</p>
+            <p className="text-[16px] font-bold uppercase tracking-wider mb-1" style={{ color, ...P }}>{label}</p>
             <p className="text-2xl font-bold" style={{ color, ...P }}>{value}</p>
           </div>
         ))}
@@ -126,7 +125,7 @@ export default function Products() {
               </div>
               <div>
                 <h3 className="text-white font-bold text-sm" style={P}>{editingId ? 'Edit Product' : 'Add New Product'}</h3>
-                <p className="text-[#5C94FC] text-[9px]" style={P}>Fill in the product details below</p>
+                <p className="text-[#5C94FC] text-[15px]" style={P}>Fill in the product details below</p>
               </div>
             </div>
             <button onClick={() => { setShowForm(false); setEditingId(null); setForm(defaultForm); }} className="w-8 h-8 border-2 border-black bg-[#E52521] text-white hover:bg-[#ff3333] flex items-center justify-center transition-all shadow-[2px_2px_0px_rgba(0,0,0,0.3)]">
@@ -135,28 +134,28 @@ export default function Products() {
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Product Name *</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Product Name *</label>
               <Input required placeholder="e.g. Aurora X1 Laptop" value={form.name} onChange={f('name')} />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Description</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Description</label>
               <Input placeholder="Short product description" value={form.description} onChange={f('description')} />
             </div>
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Price ($) *</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Price ($) *</label>
               <Input required type="number" min="0.01" step="0.01" placeholder="0.00" value={form.price} onChange={f('price')} />
             </div>
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Stock *</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Stock *</label>
               <Input required type="number" min="0" placeholder="0" value={form.stock} onChange={f('stock')} />
             </div>
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Category *</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Category *</label>
               <select
                 required
                 value={form.category}
                 onChange={f('category')}
-                className="w-full h-9 px-3 border-2 border-black bg-[#1A1A2E] text-[9px] text-[#FBD000] outline-none focus:border-[#FBD000] shadow-[2px_2px_0px_rgba(0,0,0,0.3)] cursor-pointer"
+                className="w-full h-9 px-3 border-2 border-black bg-[#1A1A2E] text-[15px] text-[#FBD000] outline-none focus:border-[#FBD000] shadow-[2px_2px_0px_rgba(0,0,0,0.3)] cursor-pointer"
                 style={{ ...P, backgroundColor: '#1A1A2E' }}
               >
                 <option value="" style={{ backgroundColor: '#1A1A2E', color: '#FBD000' }}>Select a category...</option>
@@ -168,11 +167,11 @@ export default function Products() {
               </select>
             </div>
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Seller ID</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Seller ID</label>
               <Input type="number" min="1" value={form.sellerId} onChange={f('sellerId')} />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Image URL</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Image URL</label>
               <Input placeholder="https://..." value={form.imageUrl} onChange={f('imageUrl')} />
               {form.imageUrl && (
                 <img src={form.imageUrl} alt="preview" className="mt-2 h-20 w-20 object-cover border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,0.3)]" onError={e => e.target.style.display = 'none'} />
@@ -206,7 +205,7 @@ export default function Products() {
       ) : visible.length === 0 ? (
         <div className="border-3 border-black bg-[#1A1A2E] p-16 text-center shadow-[4px_4px_0px_rgba(0,0,0,0.5)]">
           <Layers className="w-12 h-12 text-[#4a4a6a] mx-auto mb-4" />
-          <p className="text-[#5C94FC] font-bold text-[10px]" style={P}>No products found</p>
+          <p className="text-[#5C94FC] font-bold text-[16px]" style={P}>No products found</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -239,21 +238,21 @@ export default function Products() {
                       {p.category}
                     </span>
                   </div>
-                  <h3 className="text-white font-bold text-[9px] mb-1 leading-relaxed" style={{ ...P, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{p.name}</h3>
-                  {p.description && <p className="text-[#4a4a6a] text-[8px] mb-3 overflow-hidden text-ellipsis whitespace-nowrap" style={P}>{p.description}</p>}
-                  <p className="text-[#FBD000] font-bold text-lg mb-4" style={P}>{formatCurrency(p.price)}</p>
+                  <h3 className="text-white font-bold text-[15px] mb-1 leading-relaxed" style={{ ...P, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{p.name}</h3>
+                  {p.description && <p className="text-[#4a4a6a] text-[17px] mb-3 overflow-hidden text-ellipsis whitespace-nowrap" style={P}>{p.description}</p>}
+                  <p className="text-white font-bold text-lg mb-4" style={P}>{formatCurrency(p.price)}</p>
 
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleEdit(p)}
-                      className="retro-btn flex-1 flex items-center justify-center gap-1.5 text-[8px] font-bold py-2 bg-[#049CD8] hover:bg-[#06b0f0] text-white"
+                      className="retro-btn flex-1 flex items-center justify-center gap-1.5 text-[17px] font-bold py-2 bg-[#049CD8] hover:bg-[#06b0f0] text-white"
                       style={P}
                     >
                       <Pencil className="w-3 h-3" /> Edit
                     </button>
                     <button
                       onClick={() => handleDelete(p.productId)}
-                      className="retro-btn flex-1 flex items-center justify-center gap-1.5 text-[8px] font-bold py-2 bg-[#E52521] hover:bg-[#ff3333] text-white"
+                      className="retro-btn flex-1 flex items-center justify-center gap-1.5 text-[17px] font-bold py-2 bg-[#E52521] hover:bg-[#ff3333] text-white"
                       style={P}
                     >
                       <Trash2 className="w-3 h-3" /> Delete

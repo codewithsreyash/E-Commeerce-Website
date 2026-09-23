@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ShoppingCart, ArrowUp } from 'lucide-react';
 
-const P = { fontFamily: "'Press Start 2P', monospace" };
+const P = { fontFamily: "'Russo One', sans-serif" };
 
 export default function Footer() {
   const columns = [
@@ -28,7 +28,7 @@ export default function Footer() {
       {/* Back to top */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="w-full py-3 border-b-3 border-black text-[9px] text-[#FBD000] transition-colors flex items-center justify-center gap-2 hover:bg-[#C41E1A]"
+        className="w-full py-3 border-b-3 border-black text-[15px] text-[#FBD000] transition-colors flex items-center justify-center gap-2 hover:bg-[#C41E1A]"
         style={{ background: '#E52521', ...P }}
       >
         <ArrowUp size={16} /> BACK TO TOP
@@ -38,11 +38,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
         {columns.map(col => (
           <div key={col.title}>
-            <h4 className="text-[#FBD000] font-bold text-[9px] mb-4" style={P}>{col.title}</h4>
+            <h4 className="text-[#FBD000] font-bold text-[15px] mb-4" style={P}>{col.title}</h4>
             <ul className="space-y-3">
               {col.links.map(label => (
                 <li key={label}>
-                  <Link to="#" className="text-[8px] text-[#5C94FC] hover:text-[#FBD000] transition-colors" style={P}>{label}</Link>
+                  <Link to="#" className="text-[17px] text-[#5C94FC] hover:text-[#FBD000] transition-colors" style={P}>{label}</Link>
                 </li>
               ))}
             </ul>
@@ -61,7 +61,7 @@ export default function Footer() {
               Shop<span className="text-[#FBD000]">Stream</span>
             </span>
           </Link>
-          <p className="text-[7px] text-[#4a4a6a]" style={P}>© 2025 ShopStream. All rights reserved.</p>
+          <p className="text-[16px] text-[#4a4a6a]" style={P}>© 2025 ShopStream. All rights reserved.</p>
         </div>
       </div>
     </footer>

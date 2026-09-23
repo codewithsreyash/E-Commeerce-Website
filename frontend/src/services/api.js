@@ -4,7 +4,7 @@ export const TOKEN_KEY = 'shopping_admin_token';
 export const USER_KEY = 'shopping_admin_user';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8081/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
 });
 
 api.interceptors.request.use((config) => {
@@ -50,7 +50,7 @@ export const getStoredUser = () => {
 export const parseJwt = (token) => {
   try {
     return JSON.parse(atob(token.split('.')[1]));
-  } catch (e) {
+  } catch {
     return null;
   }
 };

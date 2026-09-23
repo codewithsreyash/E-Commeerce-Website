@@ -3,12 +3,11 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { Skeleton } from '../components/ui/skeleton';
 import { formatDate, getErrorMessage } from '../lib/utils';
 import { getCustomers } from '../services/api';
 import api from '../services/api';
 
-const P = { fontFamily: "'Press Start 2P', monospace" };
+const P = { fontFamily: "'Russo One', sans-serif" };
 
 const defaultForm = { firstName: '', lastName: '', email: '', password: 'Customer@123', phone: '', address: '' };
 
@@ -71,14 +70,14 @@ export default function Customers() {
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <p className="text-[8px] font-bold uppercase tracking-widest text-[#5C94FC] mb-1" style={P}>Customers</p>
-          <h1 className="text-xl font-bold text-[#FBD000]" style={P}>Customer Management</h1>
-          <p className="text-[9px] text-[#5C94FC] mt-1" style={P}>View, add, edit and delete customers.</p>
+          <p className="text-[17px] font-bold uppercase tracking-widest text-[#5C94FC] mb-1" style={P}>Customers</p>
+          <h1 className="text-xl font-bold text-white" style={P}>Customer Management</h1>
+          <p className="text-[15px] text-[#5C94FC] mt-1" style={P}>View, add, edit and delete customers.</p>
         </div>
         {!showForm && (
           <button
             onClick={() => { setShowForm(true); setEditingId(null); setForm(defaultForm); }}
-            className="retro-btn flex items-center gap-2 px-5 py-2.5 bg-[#7B2FBE] hover:bg-[#9340e0] text-white font-bold text-[9px]"
+            className="retro-btn flex items-center gap-2 px-5 py-2.5 bg-[#7B2FBE] hover:bg-[#9340e0] text-white font-bold text-[15px]"
             style={P}
           >
             <Plus className="w-4 h-4" /> Add Customer
@@ -94,7 +93,7 @@ export default function Customers() {
           { label: 'With Address', value: customers.filter(c => c.address).length, color: '#43B047' },
         ].map(({ label, value, color }) => (
           <div key={label} className="border-3 border-black shadow-[3px_3px_0px_rgba(0,0,0,0.5)] p-4" style={{ background: `${color}20` }}>
-            <p className="text-[7px] font-bold uppercase tracking-wider mb-1" style={{ color, ...P }}>{label}</p>
+            <p className="text-[16px] font-bold uppercase tracking-wider mb-1" style={{ color, ...P }}>{label}</p>
             <p className="text-2xl font-bold" style={{ color, ...P }}>{value}</p>
           </div>
         ))}
@@ -110,7 +109,7 @@ export default function Customers() {
               </div>
               <div>
                 <h3 className="text-white font-bold text-sm" style={P}>{editingId ? 'Edit Customer' : 'Add New Customer'}</h3>
-                <p className="text-[#5C94FC] text-[9px]" style={P}>Fill in the customer details</p>
+                <p className="text-[#5C94FC] text-[15px]" style={P}>Fill in the customer details</p>
               </div>
             </div>
             <button onClick={() => { setShowForm(false); setEditingId(null); setForm(defaultForm); }} className="w-8 h-8 border-2 border-black bg-[#E52521] text-white hover:bg-[#ff3333] flex items-center justify-center transition-all shadow-[2px_2px_0px_rgba(0,0,0,0.3)]">
@@ -119,27 +118,27 @@ export default function Customers() {
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>First Name *</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>First Name *</label>
               <Input required placeholder="John" value={form.firstName} onChange={f('firstName')} />
             </div>
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Last Name *</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Last Name *</label>
               <Input required placeholder="Doe" value={form.lastName} onChange={f('lastName')} />
             </div>
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Email *</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Email *</label>
               <Input required type="email" placeholder="john@example.com" value={form.email} onChange={f('email')} />
             </div>
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Password {editingId ? '(keep)' : '*'}</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Password {editingId ? '(keep)' : '*'}</label>
               <Input required={!editingId} type="password" placeholder="Min 8 chars" value={form.password} onChange={f('password')} />
             </div>
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Phone</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Phone</label>
               <Input placeholder="+1 555 0100" value={form.phone} onChange={f('phone')} />
             </div>
             <div>
-              <label className="block text-[8px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Address</label>
+              <label className="block text-[17px] text-[#5C94FC] mb-1.5 font-bold uppercase tracking-wider" style={P}>Address</label>
               <Input placeholder="123 Main St" value={form.address} onChange={f('address')} />
             </div>
             <div className="md:col-span-2 flex gap-3 pt-2">
@@ -173,7 +172,7 @@ export default function Customers() {
         ) : customers.length === 0 ? (
           <div className="border-3 border-black bg-[#1A1A2E] p-16 text-center shadow-[4px_4px_0px_rgba(0,0,0,0.5)]">
             <Users className="w-12 h-12 text-[#4a4a6a] mx-auto mb-4" />
-            <p className="text-[#5C94FC] font-bold text-[10px]" style={P}>No customers found</p>
+            <p className="text-[#5C94FC] font-bold text-[16px]" style={P}>No customers found</p>
           </div>
         ) : customers.map((c, idx) => {
           const isOpen = expandedId === c.customerId;
@@ -190,17 +189,17 @@ export default function Customers() {
 
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-[#FBD000] text-[10px]" style={P}>{c.firstName} {c.lastName}</p>
+                  <p className="font-bold text-white text-[16px]" style={P}>{c.firstName} {c.lastName}</p>
                   <div className="flex items-center gap-3 mt-1 flex-wrap">
-                    <span className="flex items-center gap-1 text-[8px] text-[#5C94FC]" style={P}>
+                    <span className="flex items-center gap-1 text-[17px] text-[#5C94FC]" style={P}>
                       <Mail className="w-3 h-3" />{c.email}
                     </span>
                     {c.phone && (
-                      <span className="flex items-center gap-1 text-[8px] text-[#4a4a6a]" style={P}>
+                      <span className="flex items-center gap-1 text-[17px] text-[#4a4a6a]" style={P}>
                         <Phone className="w-3 h-3" />{c.phone}
                       </span>
                     )}
-                    <span className="text-[7px] text-[#4a4a6a]" style={P}>Joined {formatDate(c.createdAt)}</span>
+                    <span className="text-[16px] text-[#4a4a6a]" style={P}>Joined {formatDate(c.createdAt)}</span>
                   </div>
                 </div>
 
@@ -229,9 +228,9 @@ export default function Customers() {
                     <div key={label} className="border-2 border-black p-4 shadow-[2px_2px_0px_rgba(0,0,0,0.3)]" style={{ background: `${color}10` }}>
                       <div className="flex items-center gap-2 mb-2">
                         <Icon className="w-3.5 h-3.5" style={{ color }} />
-                        <p className="text-[7px] font-bold uppercase text-[#5C94FC]" style={P}>{label}</p>
+                        <p className="text-[16px] font-bold uppercase text-[#5C94FC]" style={P}>{label}</p>
                       </div>
-                      <p className="text-[9px] font-bold text-[#FBD000]" style={P}>{val}</p>
+                      <p className="text-[15px] font-bold text-white" style={P}>{val}</p>
                     </div>
                   ))}
                 </div>

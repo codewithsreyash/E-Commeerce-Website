@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               color: '#FBD000',
               border: '3px solid #000',
               boxShadow: '4px 4px 0px rgba(0,0,0,0.5)',
-              fontFamily: "'Press Start 2P', monospace",
+              fontFamily: "'Russo One', sans-serif",
               fontSize: '10px',
               borderRadius: '0px',
             },
